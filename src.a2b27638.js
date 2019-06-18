@@ -930,10 +930,10 @@ var _default = function _default(state, actions) {
       class: ""
     }, (0, _hyperapp.h)("div", {
       class: "hidden lg:block w-full bg-center bg-no-repeat",
-      style: "background-size: 1400px; height:80vh; background-image:url(".concat(blog.image, ");")
+      style: "background-size: 1450px; height:80vh; background-image:url(".concat(blog.image, ");")
     }), (0, _hyperapp.h)("div", {
-      class: "block lg:hidden w-full bg-center bg-no-repeat",
-      style: "background-size: 1050px; height:80vh; background-image:url(".concat(blog.image, ");")
+      class: "block lg:hidden w-full bg-no-repeat",
+      style: "background-size: 850px; background-position: 50% 0%; height:60vh; background-image:url(".concat(blog.image, ");")
     }), (0, _hyperapp.h)("div", {
       class: "container w-full mx-auto md:max-w-3xl"
     }, (0, _hyperapp.h)("div", {
@@ -1051,7 +1051,7 @@ var _default = function _default(initial) {
         }, "Dungeons & Developers "), (0, _hyperapp.h)("span", {
           class: "pl-2 text-sm text-gray-800 font-semibold"
         }, "- June 12, 2019")), (0, _hyperapp.h)("p", {
-          class: "text-gray-200 my-4 h-24 text-base block-with-text"
+          class: "text-gray-200 my-4 h-24 text-base trunc"
         }, "Alright so Im not a crappy person. Sometimes I just think like one. Like this afternoon when I got a message from someone \"looking for help with web design\". It was obvious the guy had messaged the wrong person. I'm a web developer (aka software developer/engineer). Not a web designer..."), (0, _hyperapp.h)("div", {
           class: "text-gray-800 flex items-center justify-between pt-2"
         }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("span", {
@@ -1330,7 +1330,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55775" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60511" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

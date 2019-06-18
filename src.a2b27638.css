@@ -630,12 +630,11 @@ video {
   width: 45%;
 }
 
-/* .truncate {
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  } */
+.trunc {
+  max-height: 5.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .block-with-text {
   /* hide text if it more than N lines  */
