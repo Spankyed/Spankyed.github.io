@@ -812,9 +812,9 @@ var _default = function _default(state, actions) {
     class: "shadow-2xl hidden lg:block rounded-sm"
   })), (0, _hyperapp.h)("div", {
     id: "profile",
-    class: "w-full lg:w-3/5 shadow-2xl bg-reddish mx-6 lg:mx-0 rounded-sm"
+    class: "flex w-full lg:w-3/5 shadow-2xl bg-reddish mx-6 lg:mx-0 rounded-sm"
   }, (0, _hyperapp.h)("div", {
-    class: "pt-8 md:px-12 md:pb-6 text-center lg:text-left"
+    class: "w-full pt-8 md:px-12 md:pb-6 text-center lg:text-left"
   }, (0, _hyperapp.h)("div", {
     class: "block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center border-solid border-4 shadow-inset",
     style: "background-image: url('https://scontent-mia3-2.xx.fbcdn.net/v/t1.0-9/538135_477566988970424_1936353685_n.jpg?_nc_cat=111&_nc_oc=AQm4YNH3OJb-ZSHnFrW-6kETx2ecxDBUKOE8CQbgXLQSdOLqer_iqG-LmUveQ5JKwFMLtAUNox8CFMRqNSDe4CRP&_nc_ht=scontent-mia3-2.xx&oh=4c570dac25f794b8e68ceab0d2095342&oe=5D98B609')"
@@ -929,8 +929,11 @@ var _default = function _default(state, actions) {
     return (0, _hyperapp.h)("div", {
       class: ""
     }, (0, _hyperapp.h)("div", {
-      class: "w-full bg-center bg-no-repeat",
-      style: "background-size: 1600px; height:80vh; background-image:url(".concat(blog.image, ");")
+      class: "hidden lg:block w-full bg-center bg-no-repeat",
+      style: "background-size: 1400px; height:80vh; background-image:url(".concat(blog.image, ");")
+    }), (0, _hyperapp.h)("div", {
+      class: "block lg:hidden w-full bg-center bg-no-repeat",
+      style: "background-size: 1050px; height:80vh; background-image:url(".concat(blog.image, ");")
     }), (0, _hyperapp.h)("div", {
       class: "container w-full mx-auto md:max-w-3xl"
     }, (0, _hyperapp.h)("div", {
@@ -1048,22 +1051,30 @@ var _default = function _default(initial) {
         }, "Dungeons & Developers "), (0, _hyperapp.h)("span", {
           class: "pl-2 text-sm text-gray-800 font-semibold"
         }, "- June 12, 2019")), (0, _hyperapp.h)("p", {
-          class: "text-gray-200 my-4 h-24 text-base"
+          class: "text-gray-200 my-4 h-24 text-base block-with-text"
         }, "Alright so Im not a crappy person. Sometimes I just think like one. Like this afternoon when I got a message from someone \"looking for help with web design\". It was obvious the guy had messaged the wrong person. I'm a web developer (aka software developer/engineer). Not a web designer..."), (0, _hyperapp.h)("div", {
-          class: "text-gray-800 flex items-center justify-between"
+          class: "text-gray-800 flex items-center justify-between pt-2"
         }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("span", {
+          class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
+        }, "#Design"), (0, _hyperapp.h)("span", {
+          class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
+        }, "#Devopment"), (0, _hyperapp.h)("span", {
           class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
         }, "#Javascript"), (0, _hyperapp.h)("span", {
           class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
-        }, "#Webpack"), (0, _hyperapp.h)("span", {
-          class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
-        }, "#Babel")), (0, _hyperapp.h)("p", {
+        }, "#Mangos")), (0, _hyperapp.h)("p", {
           class: "text-xs md:text-sm font-semibold"
         }, "3 MIN READ"))))));
       };
     }
   };
 };
+/*
+{
+  state.cart.filter(res => res.id )
+  .map( res => res)}
+var blog = (state, actions) => ({match}) => {}*/
+
 
 exports.default = _default;
 },{"hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","./blog.js":"src/pages/blogs/blog.js"}],"src/pages/projects/projects.js":[function(require,module,exports) {
@@ -1275,11 +1286,7 @@ var view = function view(state, actions) {
     blogs: blogs.view(state.blogs, actions.blogs),
     projects: projects.view(state.projects, actions.projects)
   };
-  return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("div", {
-    class: "absolute top-0 right-0 h-12 w-18 p-4"
-  }, (0, _hyperapp.h)("button", {
-    class: "js-change-theme focus:outline-none"
-  }, "\u2600\uFE0F")), (0, _hyperapp.h)(_router.Switch, null, (0, _hyperapp.h)(_router.Route, {
+  return (0, _hyperapp.h)("div", null, (0, _hyperapp.h)(_router.Switch, null, (0, _hyperapp.h)(_router.Route, {
     path: "/",
     render: _home.default
   }), (0, _hyperapp.h)(_router.Route, {
@@ -1323,7 +1330,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64894" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55775" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
