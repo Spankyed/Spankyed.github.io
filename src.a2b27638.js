@@ -922,13 +922,13 @@ var _hyperapp = require("hyperapp");
 
 // Blogs Module
 // initial: data.blogs
-var _default = function _default(state, actions) {
+var _default = function _default(blogs, actions) {
   return function (_ref) {
     var match = _ref.match;
-    var blog = getBlogById(state, match.params.blog_id)[0];
-    return (0, _hyperapp.h)("div", {
-      class: ""
-    }, (0, _hyperapp.h)("div", {
+    var blog = blogs.filter(function (blog) {
+      return blog.id == match.params.blog_id;
+    })[0];
+    return (0, _hyperapp.h)("section", null, (0, _hyperapp.h)("div", {
       class: "hidden lg:block w-full bg-center bg-no-repeat",
       style: "background-size: 1450px; height:80vh; background-image:url(".concat(blog.image, ");")
     }), (0, _hyperapp.h)("div", {
@@ -952,14 +952,6 @@ var _default = function _default(state, actions) {
     }, blog.text))));
   };
 };
-
-exports.default = _default;
-
-function getBlogById(blogs, id) {
-  return blogs.filter(function (blog) {
-    return blog.id == id;
-  });
-}
 /*
 export default {
   down: ({ id, value }) => state => ({
@@ -980,6 +972,9 @@ export default {
     )
   })
 }*/
+
+
+exports.default = _default;
 },{"hyperapp":"node_modules/hyperapp/src/index.js"}],"src/pages/blogs/blogs.js":[function(require,module,exports) {
 "use strict";
 
@@ -998,6 +993,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Blogs Module
 // initial: data.blogs
+var BlogLink = function BlogLink(_ref) {
+  var match = _ref.match,
+      blog = _ref.blog;
+  return (0, _hyperapp.h)(_router.Link, {
+    to: "".concat(match.path, "/").concat(blog.id),
+    class: "mx-auto mb-8 bg-reddish rounded-lg shadow block flex-wrap flex w-full text-white",
+    href: "/updating-to-babel-7.4/"
+  }, (0, _hyperapp.h)("div", {
+    class: "w-full md:w-1/2 shadow bg-dark-100 rounded-lg rounded-r-none min-h-featured-item bg-center bg-no-repeat",
+    style: "background-image: url(https://cdnb.artstation.com/p/assets/images/images/007/027/571/large/greg-rutkowski-dragon-cave-1920.jpg?1503141992);\r background-size: 1100px;"
+  }), (0, _hyperapp.h)("div", {
+    class: "w-full md:w-1/2 p-4"
+  }, (0, _hyperapp.h)("div", {
+    class: "border-b border-gray-700"
+  }, (0, _hyperapp.h)("h3", {
+    class: "font-bold text-3xl mb-4 inline-block "
+  }, blog.title), (0, _hyperapp.h)("span", {
+    class: "pl-2 text-sm text-gray-800 font-semibold"
+  }, "- ", blog.date)), (0, _hyperapp.h)("p", {
+    class: "text-gray-200 my-4 h-24 text-base trunc"
+  }, blog.description), (0, _hyperapp.h)("div", {
+    class: "text-gray-800 flex items-center justify-between pt-2"
+  }, (0, _hyperapp.h)("div", null, blog.tags.map(function (tag) {
+    return (0, _hyperapp.h)("span", {
+      class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
+    }, "#", tag);
+  })), (0, _hyperapp.h)("p", {
+    class: "text-xs md:text-sm font-semibold"
+  }, "3 MIN READ"))));
+};
+
 var _default = function _default(initial) {
   return {
     state: {
@@ -1013,8 +1039,8 @@ var _default = function _default(initial) {
       }
     },
     view: function view(state, actions) {
-      return function (_ref) {
-        var match = _ref.match;
+      return function (_ref2) {
+        var match = _ref2.match;
         return (0, _hyperapp.h)("div", null, match.params ? (0, _hyperapp.h)(_router.Route, {
           parent: true,
           path: "".concat(match.path, "/:blog_id"),
@@ -1035,49 +1061,23 @@ var _default = function _default(initial) {
           class: "font-serif font-black text-5xl mb-2"
         }, "Blog"), (0, _hyperapp.h)("h2", {
           class: "font-light"
-        }, "The Communist Soapbox.")))))), (0, _hyperapp.h)(_router.Link, {
-          to: "".concat(match.path, "/1"),
-          class: "mx-auto mb-8 bg-reddish rounded-lg shadow block flex-wrap flex w-full text-white",
-          href: "/updating-to-babel-7.4/"
-        }, (0, _hyperapp.h)("div", {
-          class: "w-full md:w-1/2 shadow bg-dark-100 rounded-lg rounded-r-none min-h-featured-item bg-center bg-no-repeat",
-          style: "background-image: url(https://cdnb.artstation.com/p/assets/images/images/007/027/571/large/greg-rutkowski-dragon-cave-1920.jpg?1503141992);\r background-size: 1100px;"
-        }), (0, _hyperapp.h)("div", {
-          class: "w-full md:w-1/2 p-4"
-        }, (0, _hyperapp.h)("div", {
-          class: "border-b border-gray-700"
-        }, (0, _hyperapp.h)("h3", {
-          class: "font-bold text-3xl mb-4 inline-block "
-        }, "Dungeons & Developers "), (0, _hyperapp.h)("span", {
-          class: "pl-2 text-sm text-gray-800 font-semibold"
-        }, "- June 12, 2019")), (0, _hyperapp.h)("p", {
-          class: "text-gray-200 my-4 h-24 text-base trunc"
-        }, "Alright so Im not a crappy person. Sometimes I just think like one. Like this afternoon when I got a message from someone \"looking for help with web design\". It was obvious the guy had messaged the wrong person. I'm a web developer (aka software developer/engineer). Not a web designer..."), (0, _hyperapp.h)("div", {
-          class: "text-gray-800 flex items-center justify-between pt-2"
-        }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("span", {
-          class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
-        }, "#Design"), (0, _hyperapp.h)("span", {
-          class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
-        }, "#Devopment"), (0, _hyperapp.h)("span", {
-          class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
-        }, "#Javascript"), (0, _hyperapp.h)("span", {
-          class: "inline-block text-xs py-1 px-2 mt-0 mr-2 rounded-sm mb-1 ml-0 text-grey-darker bg-yurp leading-none"
-        }, "#Mangos")), (0, _hyperapp.h)("p", {
-          class: "text-xs md:text-sm font-semibold"
-        }, "3 MIN READ"))))));
+        }, "The Communist Soapbox.")))))), state.blogs.map(function (blog) {
+          return (0, _hyperapp.h)(BlogLink, {
+            blog: blog,
+            match: match
+          });
+        })));
       };
     }
   };
 };
-/*
-{
-  state.cart.filter(res => res.id )
-  .map( res => res)}
-var blog = (state, actions) => ({match}) => {}*/
+/* switch might eliminate coniditional
+<Switch></Switch>
+*/
 
 
 exports.default = _default;
-},{"hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","./blog.js":"src/pages/blogs/blog.js"}],"src/pages/projects/projects.js":[function(require,module,exports) {
+},{"hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","./blog.js":"src/pages/blogs/blog.js"}],"src/pages/projects/project.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1087,26 +1087,101 @@ exports.default = void 0;
 
 var _hyperapp = require("hyperapp");
 
+// Blogs Module
+// initial: data.blogs
+var _default = function _default(projects, actions) {
+  return function (_ref) {
+    var match = _ref.match;
+    var project = projects.filter(function (project) {
+      return project.id == match.params.project_id;
+    })[0];
+    return (0, _hyperapp.h)("section", null, (0, _hyperapp.h)("div", {
+      class: "hidden mx-auto lg:block w-full bg-center bg-no-repeat",
+      style: "background-size: 1450px; height:80vh; background-image:url(".concat(project.image, ");")
+    }, (0, _hyperapp.h)("h1", {
+      class: "title text-center align-bottom text-yellow pb-4 text-4xl md:text-6xl",
+      style: "line-height:60vh;"
+    }, project.title)), (0, _hyperapp.h)("div", {
+      class: "block lg:hidden w-full bg-no-repeat",
+      style: "background-size: 850px; background-position: 50% 0%; height:60vh; background-image:url(".concat(project.image, ");")
+    }, (0, _hyperapp.h)("h1", {
+      class: "title text-center align-bottom text-yellow pb-4 text-4xl md:text-6xl",
+      style: "line-height:60vh"
+    }, project.title)), (0, _hyperapp.h)("div", {
+      class: "bg-reddish container w-full mx-auto md:max-w-3xl -mt-32"
+    }, (0, _hyperapp.h)("div", {
+      class: "w-full px-4 md:px-6 text-xl text-gray-100 leading-normal",
+      style: "font-family:Georgia,serif;"
+    }, (0, _hyperapp.h)("div", {
+      class: "font-sans"
+    }, (0, _hyperapp.h)("span", {
+      class: "text-base md:text-sm text-teal-500 font-bold"
+    }, (0, _hyperapp.h)("span", null))), (0, _hyperapp.h)("p", {
+      class: "py-6"
+    }, project.text))));
+  };
+};
+
+exports.default = _default;
+},{"hyperapp":"node_modules/hyperapp/src/index.js"}],"src/pages/projects/projects.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _hyperapp = require("hyperapp");
+
+var _router = require("@hyperapp/router");
+
+var _project = _interopRequireDefault(require("./project.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // Projects Module
 // initial: data.projects
+var ProjectLink = function ProjectLink(_ref) {
+  var match = _ref.match,
+      project = _ref.project;
+  return (0, _hyperapp.h)(_router.Link, {
+    to: "".concat(match.path, "/").concat(project.id),
+    class: "project-list px-4 sm:flex sm:justify-around sm:flex-wrap"
+  }, (0, _hyperapp.h)("div", {
+    class: "project bg-reddish shadow-lg border border-yellow mb-8 sm:w-45"
+  }, (0, _hyperapp.h)("a", {
+    href: "./my-task-grid",
+    class: "project-link no-underline text-grey-80"
+  }, (0, _hyperapp.h)("header", {
+    class: "project-thumbnail relative h-64 border-b-4 border-yellow bg-cover bg-center",
+    style: "background-image: url(".concat(project.image, ");")
+  }, (0, _hyperapp.h)("div", {
+    class: "overlay flex items-end justify-center px-2 absolute h-full w-full bg-black-alpha-30"
+  }, (0, _hyperapp.h)("h2", {
+    class: "bg-yellow text-xl text-black p-4"
+  }, project.title))), (0, _hyperapp.h)("div", {
+    class: "project-summary text-grey-80 p-4 text-center leading-normal"
+  }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("span", {
+    class: "border-b-2 border-grey-60"
+  }, project.tools)), (0, _hyperapp.h)("p", {
+    class: "my-3"
+  }, project.description)))));
+};
+
 var _default = function _default(initial) {
   return {
     state: {
-      value: initial
+      projects: initial
     },
-    actions: {
-      //decrement: by => (state, actions) => { return { value: state.value - by } },
-      increment: function increment(evt) {
-        return function (state) {
-          return {
-            value: state.value + evt.value
-          };
-        };
-      }
-    },
+    actions: {},
     view: function view(state, actions) {
-      return function (_) {
-        return (0, _hyperapp.h)("div", {
+      return function (_ref2) {
+        var match = _ref2.match;
+        return (0, _hyperapp.h)("div", null, match.params ? (0, _hyperapp.h)(_router.Route, {
+          parent: true,
+          path: "".concat(match.path, "/:project_id"),
+          render: (0, _project.default)(state.projects, actions)
+        }) : (0, _hyperapp.h)("div", {
           class: "container mx-auto min-h-screen"
         }, (0, _hyperapp.h)("section", {
           class: "leading-tight py-6 px-4"
@@ -1122,57 +1197,27 @@ var _default = function _default(initial) {
           class: "font-serif font-black text-5xl mb-2"
         }, "Projects"), (0, _hyperapp.h)("h2", {
           class: "font-light"
-        }, "Applications I've designed and developed.")))))), (0, _hyperapp.h)("section", {
-          class: "project-list px-4 sm:flex sm:justify-around sm:flex-wrap"
-        }, (0, _hyperapp.h)("div", {
-          class: "project bg-reddish shadow-lg border border-yellow mb-8 sm:w-45"
-        }, (0, _hyperapp.h)("a", {
-          href: "./my-task-grid",
-          class: "project-link no-underline text-grey-80"
-        }, (0, _hyperapp.h)("header", {
-          class: "relative project-thumbnail h-64 border-b-4 border-yellow bg-cover bg-center",
-          style: "background-image: url('https://res.cloudinary.com/duua3lsu1/image/upload/v1557590908/blog/task-grid-thumbnail.png');"
-        }, (0, _hyperapp.h)("div", {
-          class: "overlay flex items-end justify-center px-2 absolute h-full w-full bg-black-alpha-30"
-        }, (0, _hyperapp.h)("h2", {
-          class: "bg-yellow text-xl text-black p-4"
-        }, "My Task Grid"))), (0, _hyperapp.h)("div", {
-          class: "project-summary text-grey-80 p-4 text-center leading-normal"
-        }, (0, _hyperapp.h)("div", null, (0, _hyperapp.h)("span", {
-          class: "border-b-2 border-grey-60"
-        }, "Javascript | React | Sass")), (0, _hyperapp.h)("p", {
-          class: "my-3"
-        }, "Task management app built with Reacts"))))));
+        }, "Applications I've designed and developed.")))))), state.projects.map(function (project) {
+          return (0, _hyperapp.h)(ProjectLink, {
+            project: project,
+            match: match
+          });
+        })));
       };
     }
   };
-}; //class={`font-light bg-${theme}-dark text-${theme}-darker hover:bg-${theme}-lighter`}
-
+};
 /*
-{
-  state.cart.filter(res => res.id )
-  .map( res => 
-
-      <CartItems movie_id={res.id}
-      title={res.movie_title}
-      price={res.price}
-      quantity= {res.quantity}
-      total= {res.quantity * res.price }
-      poster= {res.movie_poster}
-      />
-
-  )
-}
+  class={`font-light bg-${theme}-dark text-${theme}-darker hover:bg-${theme}-lighter`}
  <Enter time={200} easing="ease-in-out" 
         css={{opacity: "0", transform: "scale(1,1)"}}>
 
         import { Enter } from "@hyperapp/transitions"
-
-<Link to={`/details/${movie_id}`} ></Link>*/
+*/
 
 
 exports.default = _default;
-},{"hyperapp":"node_modules/hyperapp/src/index.js"}],"node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":[function(require,module,exports) {
+},{"hyperapp":"node_modules/hyperapp/src/index.js","@hyperapp/router":"node_modules/@hyperapp/router/src/index.js","./project.js":"src/pages/projects/project.js"}],"node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":[function(require,module,exports) {
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) {
     for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
@@ -1226,16 +1271,27 @@ var randString = function randString() {
 };
 
 var themes = ['green', 'teal', 'blue', 'indigo', 'purple', 'orange', 'yellow', 'grey', 'red', 'pink'];
+var projects = [{
+  "id": 1,
+  "title": "My Task Grid",
+  "image": "https://res.cloudinary.com/duua3lsu1/image/upload/v1557590908/blog/task-grid-thumbnail.png",
+  "tools": "Javascript | React | Sass",
+  "description": "Task management app built with Reacts",
+  "text": 'Alright so Im not a crappy person. Sometimes I just think like one. Like this afternoon when I got a message from someone "looking for help with web design". It was obvious the guy had messaged the wrong person. Im a web developer (aka software developer/engineer). Not a web designer. But hold on, "after reading your Simbi page, I wonder if you might also be able to help me with another goal of mine". Hopefully something developer oriented, am I right?[screenshot - "Do you see this set-up here? www.dungeonsanddevelopers.com. Id really love to find a way to copy it (or make my own), where I can make my own talent tree, add my own images and text."]Heres a list of things Id really love. Id really love a puppy. Id really love a decent haircut. Id really love to see a few people attempt to drop in at my local skatepark. Id really love for there to be more 3D character artists/animators on the internet willing to work for free. Id really love it if Rune Skovbo could help Mackey calculate 2D blend trees in javascript so I can steal his animation code. Id really love it if the bank would stop forclosing on my home. Id really love to write a good blog entry.I probably wouldnt mind making a skill/talent tree for the guy messaging me either. I mean I have to do something similar to interface with the dialog tree from Watson Assistant for one of my project anyways. Plus if I decide not to help him, he might try to say I stole his idea and used it in one of my projects. If you havent visited the Dungeon And Developers website yet, dont worry, I already did it for you. Its basically a quiz to test how talented you are in web development. Im a lvl 24 web developer. [image here]Who am I fooling Im no lvl 24 web developer. Im a web designer at best. I should be honored that someone even messaged me for my help. Fuck my career aspirations, right? I am curently reevaluating why I signed up on that sYmBiOtiC site in the first place. My house is getting forclosed, I need to be looking for a way to pay this mortgage, not designing someones skill tree for the free. If your still reading this, let me take this opportunity to share with you my [resume] in case your considering hiring me for a job (please help).Idk where im going with this blog. Its my first time, go easy on me . If this blog hasnt been useful for anything, jus know... you should try and eat a mango while its still mostly green. The way I see it, most the mangos you will ever eat will probably be ripe and mostly yellow. But if your like me, and you really love mangos, try mixing it up by eating one while its still a little bitter. Its a nice way to condition yourselve for bullsh-[mango images]Crap, I suck at blogging. Feel like I couldve written the whole thing backwards and it wouldve still made as much sense. I hope I get better at this. And by get better, I mean I hope it takes less time cause I got other stuff to do. Btw there may have been more to the site that I titled this entry after. I just didnt care enough to look into it.  Supposedly its an RPG?I think the real takeaway here is this: if you wanna get someone to help you with something, make them reevaluate their identity, and provide them an opportunity to prove that they arent an imposter. And preferably get them to do so at a very challening moment in their lives.If you dont wanna hire me you can support me on patreon. Im tryna buy a racing sim rig. I will design you a website for all donations over 50. I havent really setup the patreon yet, so just cashapp me and we will work it out.',
+  "date": "June 12, 2019",
+  "tags": ["Design", "Devopment", "Javascript", "Mangos"]
+}];
 var blogs = [{
   "id": 1,
   "title": "Dungeons & Developers ",
   "image": "https://cdnb.artstation.com/p/assets/images/images/007/027/571/large/greg-rutkowski-dragon-cave-1920.jpg?1503141992",
-  "description": "bla bla",
+  "description": 'Alright so Im not a crappy person. Sometimes I just think like one.Like this afternoon when I got a message from someone "looking for help with web design". It was obvious the guy had messaged the wrong person. Im a web developer (aka software developer/engineer). Not a web designer...',
   "text": 'Alright so Im not a crappy person. Sometimes I just think like one. Like this afternoon when I got a message from someone "looking for help with web design". It was obvious the guy had messaged the wrong person. Im a web developer (aka software developer/engineer). Not a web designer. But hold on, "after reading your Simbi page, I wonder if you might also be able to help me with another goal of mine". Hopefully something developer oriented, am I right?[screenshot - "Do you see this set-up here? www.dungeonsanddevelopers.com. Id really love to find a way to copy it (or make my own), where I can make my own talent tree, add my own images and text."]Heres a list of things Id really love. Id really love a puppy. Id really love a decent haircut. Id really love to see a few people attempt to drop in at my local skatepark. Id really love for there to be more 3D character artists/animators on the internet willing to work for free. Id really love it if Rune Skovbo could help Mackey calculate 2D blend trees in javascript so I can steal his animation code. Id really love it if the bank would stop forclosing on my home. Id really love to write a good blog entry.I probably wouldnt mind making a skill/talent tree for the guy messaging me either. I mean I have to do something similar to interface with the dialog tree from Watson Assistant for one of my project anyways. Plus if I decide not to help him, he might try to say I stole his idea and used it in one of my projects. If you havent visited the Dungeon And Developers website yet, dont worry, I already did it for you. Its basically a quiz to test how talented you are in web development. Im a lvl 24 web developer. [image here]Who am I fooling Im no lvl 24 web developer. Im a web designer at best. I should be honored that someone even messaged me for my help. Fuck my career aspirations, right? I am curently reevaluating why I signed up on that sYmBiOtiC site in the first place. My house is getting forclosed, I need to be looking for a way to pay this mortgage, not designing someones skill tree for the free. If your still reading this, let me take this opportunity to share with you my [resume] in case your considering hiring me for a job (please help).Idk where im going with this blog. Its my first time, go easy on me . If this blog hasnt been useful for anything, jus know... you should try and eat a mango while its still mostly green. The way I see it, most the mangos you will ever eat will probably be ripe and mostly yellow. But if your like me, and you really love mangos, try mixing it up by eating one while its still a little bitter. Its a nice way to condition yourselve for bullsh-[mango images]Crap, I suck at blogging. Feel like I couldve written the whole thing backwards and it wouldve still made as much sense. I hope I get better at this. And by get better, I mean I hope it takes less time cause I got other stuff to do. Btw there may have been more to the site that I titled this entry after. I just didnt care enough to look into it.  Supposedly its an RPG?I think the real takeaway here is this: if you wanna get someone to help you with something, make them reevaluate their identity, and provide them an opportunity to prove that they arent an imposter. And preferably get them to do so at a very challening moment in their lives.If you dont wanna hire me you can support me on patreon. Im tryna buy a racing sim rig. I will design you a website for all donations over 50. I havent really setup the patreon yet, so just cashapp me and we will work it out.',
   "date": "June 12, 2019",
-  "tags": ["design", "devopment", "javascript"]
+  "tags": ["Design", "Devopment", "Javascript", "Mangos"]
 }];
 var _default = {
+  projects: projects,
   blogs: blogs,
   counters: (0, _toConsumableArray2.default)(new Array(10)).map(function (item, index) {
     return {
@@ -1265,9 +1321,9 @@ var _data = _interopRequireDefault(require("./data"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var blogs = (0, _blogs.default)(_data.default.blogs); // data.blogs set initial values for module
+var blogs = (0, _blogs.default)(_data.default.blogs); // data.blogs sets initial value for module
 
-var projects = (0, _projects.default)();
+var projects = (0, _projects.default)(_data.default.projects);
 var state = {
   location: _router.location.state,
   // router module
@@ -1276,7 +1332,6 @@ var state = {
 };
 var actions = {
   location: _router.location.actions,
-  // router module
   blogs: blogs.actions,
   projects: projects.actions
 };
@@ -1290,6 +1345,7 @@ var view = function view(state, actions) {
     path: "/",
     render: _home.default
   }), (0, _hyperapp.h)(_router.Route, {
+    parent: true,
     path: "/projects",
     render: index.projects
   }), (0, _hyperapp.h)(_router.Route, {
@@ -1297,8 +1353,7 @@ var view = function view(state, actions) {
     path: "/blogs",
     render: index.blogs
   })));
-}; //<Route path="/blogs" render={ index.blogs } />    
-
+};
 
 var main = (0, _hyperapp.app)(state, actions, view, document.body);
 
@@ -1330,7 +1385,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60511" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54046" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
