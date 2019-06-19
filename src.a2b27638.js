@@ -1148,10 +1148,7 @@ var ProjectLink = function ProjectLink(_ref) {
     to: "".concat(match.path, "/").concat(project.id),
     class: "project-list px-4 sm:flex sm:justify-around sm:flex-wrap"
   }, (0, _hyperapp.h)("div", {
-    class: "project bg-reddish shadow-lg border border-yellow mb-8 sm:w-45"
-  }, (0, _hyperapp.h)("a", {
-    href: "./my-task-grid",
-    class: "project-link no-underline text-grey-80"
+    class: "project-link  bg-reddish shadow-lg border border-yellow text-grey-80 mb-8 sm:w-45"
   }, (0, _hyperapp.h)("header", {
     class: "project-thumbnail relative h-64 border-b-4 border-yellow bg-cover bg-center",
     style: "background-image: url(".concat(project.image, ");")
@@ -1165,7 +1162,7 @@ var ProjectLink = function ProjectLink(_ref) {
     class: "border-b-2 border-grey-60"
   }, project.tools)), (0, _hyperapp.h)("p", {
     class: "my-3"
-  }, project.description)))));
+  }, project.description))));
 };
 
 var _default = function _default(initial) {
@@ -1385,7 +1382,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54046" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51354" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
