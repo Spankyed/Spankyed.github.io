@@ -841,9 +841,9 @@ var _default = function _default(state, actions) {
   })), "Boca Raton, Florida"), (0, _hyperapp.h)("p", {
     class: "pt-8 font-semibold text-gray-200"
   }, "Engineering personalized solutions to complex problems."), (0, _hyperapp.h)("div", {
-    class: "pt-12 pb-8 flex items-center justify-center"
+    class: "pt-12 pb-8 mx-auto flex items-center justify-center"
   }, (0, _hyperapp.h)("div", {
-    class: "flex rounded border-b-2 border-gray-400 mx-4"
+    class: "flex rounded border-b-2 border-gray-400 mx-2"
   }, (0, _hyperapp.h)("button", {
     class: "block text-white text-sm shadow-border bg-blue-700 hover:bg-blue-900 text-sm py-3 px-4 font-sans tracking-wide uppercase font-bold"
   }, "Live"), (0, _hyperapp.h)("div", {
@@ -854,7 +854,7 @@ var _default = function _default(state, actions) {
     class: "fas fa-user fa-fw fa-inverse"
   })))), (0, _hyperapp.h)(_router.Link, {
     to: "/projects",
-    class: "flex rounded border-b-2 border-gray-400 mx-4"
+    class: "flex rounded border-b-2 border-gray-400 mx-2"
   }, (0, _hyperapp.h)("button", {
     class: "block text-white text-sm shadow-border bg-green-700 hover:bg-green-900 text-sm py-3 px-4 font-sans tracking-wide uppercase font-bold"
   }, "Projects"), (0, _hyperapp.h)("div", {
@@ -865,7 +865,7 @@ var _default = function _default(state, actions) {
     class: "fas fa-project-diagram fa-fw fa-inverse"
   })))), (0, _hyperapp.h)(_router.Link, {
     to: "/blogs",
-    class: "flex rounded border-b-2 border-gray-400 mx-4"
+    class: "flex rounded border-b-2 border-gray-400 mx-2"
   }, (0, _hyperapp.h)("button", {
     class: "block text-white text-sm shadow-border bg-green-700 hover:bg-green-900 text-sm py-3 px-4 font-sans tracking-wide uppercase font-bold"
   }, "Blog"), (0, _hyperapp.h)("div", {
@@ -1012,9 +1012,9 @@ var BlogLink = function BlogLink(_ref) {
   }, blog.date), (0, _hyperapp.h)("h3", {
     class: "font-bold text-3xl mb-2 inline-block text-gray-200"
   }, blog.title)), (0, _hyperapp.h)("p", {
-    class: "text-gray-200 my-4 h-24 text-base trunc"
+    class: "text-gray-200 my-4 h-auto text-base overflow-hidden"
   }, blog.description), (0, _hyperapp.h)("div", {
-    class: "text-gray-800 flex items-center justify-between pt-4"
+    class: "text-gray-800 flex items-center justify-between"
   }, (0, _hyperapp.h)("div", null, blog.tags.map(function (tag) {
     return (0, _hyperapp.h)("span", {
       class: "inline-block rounded-sm text-xs text-grey-darker bg-yurp py-1 px-2 mr-2 mb-1 ml-0 leading-none"
@@ -1393,7 +1393,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55898" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65038" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
