@@ -618,17 +618,21 @@ video {
   background: #191919;
 }
 
-.text-yellow{
-  color: #fcc81e !important;
-  text-shadow: 0px 2px 3px #555;
-}
-
 .bg-yellow {
   background-color: #fcc81e;
 }
 
 .bg-black-alpha-30 {
   background-color: rgba(0, 0, 0, .3);
+}
+
+.text-yellow{
+  color: #fcc81e !important;
+  text-shadow: 0px 2px 3px #555;
+}
+
+.border-white{
+  border-color: #efecea;
 }
 
 .sm\:w-45 {
@@ -640,6 +644,8 @@ video {
   /* I picked this font because it's the closest looking 'web safe' font http://cssfontstack.com/ */
   text-transform: uppercase;
   letter-spacing: 3px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 /**
