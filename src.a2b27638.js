@@ -802,13 +802,19 @@ var _hyperapp = require("hyperapp");
 
 var _router = require("@hyperapp/router");
 
+var imgUrl = "https://i.ibb.co/y83tr7m/fix-that.png";
+
+function aclick() {
+  alert(" \n  Wow you really clicked the button... \n  This feature is still very early in development\n  Try again much, much later\n  \n In the meantime, here some background music \n  \n FYI: if you're ever on sketchy page, leave immediately and avoid clicking anything. It could be the catalyst for a hack");
+}
+
 var _default = function _default(state, actions) {
   return (0, _hyperapp.h)("div", {
     class: "bg-wurp max-w-3xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0"
   }, (0, _hyperapp.h)("div", {
     class: "w-full lg:w-2/5 "
   }, (0, _hyperapp.h)("img", {
-    src: "https://scontent-mia3-2.xx.fbcdn.net/v/t1.0-9/538135_477566988970424_1936353685_n.jpg?_nc_cat=111&_nc_oc=AQm4YNH3OJb-ZSHnFrW-6kETx2ecxDBUKOE8CQbgXLQSdOLqer_iqG-LmUveQ5JKwFMLtAUNox8CFMRqNSDe4CRP&_nc_ht=scontent-mia3-2.xx&oh=4c570dac25f794b8e68ceab0d2095342&oe=5D98B609",
+    src: imgUrl,
     class: "shadow-2xl hidden lg:block rounded-sm"
   })), (0, _hyperapp.h)("div", {
     id: "profile",
@@ -817,7 +823,7 @@ var _default = function _default(state, actions) {
     class: "w-full pt-8 md:px-12 md:pb-6 text-center lg:text-left"
   }, (0, _hyperapp.h)("div", {
     class: "block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center border-solid border-4 shadow-inset",
-    style: "background-image: url('https://scontent-mia3-2.xx.fbcdn.net/v/t1.0-9/538135_477566988970424_1936353685_n.jpg?_nc_cat=111&_nc_oc=AQm4YNH3OJb-ZSHnFrW-6kETx2ecxDBUKOE8CQbgXLQSdOLqer_iqG-LmUveQ5JKwFMLtAUNox8CFMRqNSDe4CRP&_nc_ht=scontent-mia3-2.xx&oh=4c570dac25f794b8e68ceab0d2095342&oe=5D98B609')"
+    style: "background-image: url('".concat(imgUrl, "')")
   }), (0, _hyperapp.h)("h1", {
     class: "text-4xl font-bold pt-8 lg:pt-0"
   }, "Angel Santiago"), (0, _hyperapp.h)("div", {
@@ -845,6 +851,7 @@ var _default = function _default(state, actions) {
   }, (0, _hyperapp.h)("div", {
     class: "flex rounded border-b-2 border-gray-400 mx-2"
   }, (0, _hyperapp.h)("button", {
+    onclick: aclick,
     class: "block text-white text-sm shadow-border bg-blue-700 hover:bg-blue-900 text-sm py-3 px-4 font-sans tracking-wide uppercase font-bold"
   }, "Live"), (0, _hyperapp.h)("div", {
     class: "bg-blue-400 shadow-border p-3"
@@ -956,7 +963,7 @@ var _default = function _default(blogs, actions) {
     })), (0, _hyperapp.h)("h1", {
       class: "font-bold font-sans break-normal text-gray-900 text-3xl md:text-4xl"
     }, blog.title)), (0, _hyperapp.h)("div", {
-      class: "py-6 markdown-body",
+      class: "py-6 markdown-body text-gray-900",
       oncreate: compile
     }))));
   };
@@ -1070,7 +1077,7 @@ var _default = function _default(initial) {
           class: "font-serif font-black text-5xl mb-2"
         }, "Blog"), (0, _hyperapp.h)("h2", {
           class: "font-light"
-        }, "The Communist Soapbox.")))))), state.blogs.map(function (blog) {
+        }, "The Web Developer Soapbox.")))))), state.blogs.map(function (blog) {
           return (0, _hyperapp.h)(BlogLink, {
             blog: blog,
             match: match
@@ -1097,26 +1104,31 @@ exports.default = void 0;
 var _hyperapp = require("hyperapp");
 
 // Projects Module
+var dangerouslySetInnerHTML = function dangerouslySetInnerHTML(html) {
+  return function (element) {
+    element.innerHTML = html;
+  };
+};
+
 var _default = function _default(projects, actions) {
   return function (_ref) {
     var match = _ref.match;
+    window.scrollTo(0, 0);
     var project = projects.filter(function (project) {
       return project.id == match.params.project_id;
     })[0];
+    var compile = dangerouslySetInnerHTML(project.text);
     return (0, _hyperapp.h)("section", null, (0, _hyperapp.h)("div", {
       class: "hidden mx-auto lg:block w-full bg-center bg-no-repeat",
       style: "background-size: 1450px; height:80vh; background-image:url(".concat(project.image, ");")
-    }, (0, _hyperapp.h)("h1", {
-      class: "title text-center align-bottom text-yellow pb-4 text-4xl md:text-6xl",
-      style: "line-height:60vh;"
-    }, project.title)), (0, _hyperapp.h)("div", {
+    }), (0, _hyperapp.h)("div", {
       class: "block lg:hidden w-full bg-no-repeat",
       style: "background-size: 850px; background-position: 50% 0%; height:60vh; background-image:url(".concat(project.image, ");")
     }, (0, _hyperapp.h)("h1", {
       class: "title text-center align-bottom text-yellow pb-4 text-4xl md:text-6xl",
       style: "line-height:60vh"
     }, project.title)), (0, _hyperapp.h)("div", {
-      class: "bg-reddish container w-full mx-auto max-w-5xl -mt-32 border-4 border-gray-700"
+      class: "py-6 bg-reddish container w-full mx-auto max-w-5xl -mt-32 border-4 border-gray-700"
     }, (0, _hyperapp.h)("div", {
       class: "w-full px-4 md:px-6 text-xl text-gray-100 leading-normal",
       style: "font-family:Georgia,serif;"
@@ -1124,9 +1136,10 @@ var _default = function _default(projects, actions) {
       class: "font-sans"
     }, (0, _hyperapp.h)("span", {
       class: "text-base md:text-sm text-teal-500 font-bold"
-    }, (0, _hyperapp.h)("span", null))), (0, _hyperapp.h)("p", {
-      class: "py-6"
-    }, project.text))));
+    }, (0, _hyperapp.h)("span", null))), (0, _hyperapp.h)("div", {
+      class: "py-6 markdown-body text-grey-100",
+      oncreate: compile
+    }))));
   };
 };
 
@@ -1280,24 +1293,49 @@ var randString = function randString() {
 var themes = ['green', 'teal', 'blue', 'indigo', 'purple', 'orange', 'yellow', 'grey', 'red', 'pink'];
 var projects = [{
   "id": 1,
-  "title": "My Task Grid",
-  "image": "https://res.cloudinary.com/duua3lsu1/image/upload/v1557590908/blog/task-grid-thumbnail.png",
-  "tools": "Javascript | React | Sass",
-  "description": "Task management app built with Reacts",
-  "text": 'Alright so Im not a crappy person. Sometimes I just think like one. Like this afternoon when I got a message from someone "looking for help with web design". It was obvious the guy had messaged the wrong person. Im a web developer (aka software developer/engineer). Not a web designer. But hold on, "after reading your Simbi page, I wonder if you might also be able to help me with another goal of mine". Hopefully something developer oriented, am I right?[screenshot - "Do you see this set-up here? www.dungeonsanddevelopers.com. Id really love to find a way to copy it (or make my own), where I can make my own talent tree, add my own images and text."]Heres a list of things Id really love. Id really love a puppy. Id really love a decent haircut. Id really love to see a few people attempt to drop in at my local skatepark. Id really love for there to be more 3D character artists/animators on the internet willing to work for free. Id really love it if Rune Skovbo could help Mackey calculate 2D blend trees in javascript so I can steal his animation code. Id really love it if the bank would stop forclosing on my home. Id really love to write a good blog entry.I probably wouldnt mind making a skill/talent tree for the guy messaging me either. I mean I have to do something similar to interface with the dialog tree from Watson Assistant for one of my project anyways. Plus if I decide not to help him, he might try to say I stole his idea and used it in one of my projects. If you havent visited the Dungeon And Developers website yet, dont worry, I already did it for you. Its basically a quiz to test how talented you are in web development. Im a lvl 24 web developer. [image here]Who am I fooling Im no lvl 24 web developer. Im a web designer at best. I should be honored that someone even messaged me for my help. Fuck my career aspirations, right? I am curently reevaluating why I signed up on that sYmBiOtiC site in the first place. My house is getting forclosed, I need to be looking for a way to pay this mortgage, not designing someones skill tree for the free. If your still reading this, let me take this opportunity to share with you my [resume] in case your considering hiring me for a job (please help).Idk where im going with this blog. Its my first time, go easy on me . If this blog hasnt been useful for anything, jus know... you should try and eat a mango while its still mostly green. The way I see it, most the mangos you will ever eat will probably be ripe and mostly yellow. But if your like me, and you really love mangos, try mixing it up by eating one while its still a little bitter. Its a nice way to condition yourselve for bullsh-[mango images]Crap, I suck at blogging. Feel like I couldve written the whole thing backwards and it wouldve still made as much sense. I hope I get better at this. And by get better, I mean I hope it takes less time cause I got other stuff to do. Btw there may have been more to the site that I titled this entry after. I just didnt care enough to look into it.  Supposedly its an RPG?I think the real takeaway here is this: if you wanna get someone to help you with something, make them reevaluate their identity, and provide them an opportunity to prove that they arent an imposter. And preferably get them to do so at a very challening moment in their lives.If you dont wanna hire me you can support me on patreon. Im tryna buy a racing sim rig. I will design you a website for all donations over 50. I havent really setup the patreon yet, so just cashapp me and we will work it out.',
-  "date": "June 12, 2019",
-  "tags": ["Design", "Devopment", "Javascript", "Mangos"]
+  "title": "YouTranslate",
+  "image": "https://i.ibb.co/XWxdHtW/yt.png",
+  "tools": "Node | Heroku | Hyperapp",
+  "description": "Web App to translate youtube captions (Powered by Google Cloud)",
+  "text": "<p>Wow, so I have a lot to say about this project. I wrote it almost a year ago. The outline for this, along with a more detailed description is on a hard drive in Boca Raton. One day I'll retrieve it and you can learn all about the week long process I went through to make this application. </p><p>Most importantly, the application doesn't work right now. Because of CORS restrictions, the application requires a reverse proxy server to retrieve CC data  from Youtube's web api. I believe there may be an issue with my Heroku account that is hosting the node reverse proxy server.  For now, uh, checkout the github page. And if your interested in trying it out, replace the URL for the reverse proxy with any working one. </p><p>file location: <em>src/utils/translate.js</em>replace this url:  <em>https://intense-river-58574.herokuapp.com/</em></p><p>https://github.com/Spankyed/YouTranslate</p>",
+  "date": "July 9, 2019",
+  "tags": ["Hyperapp", "Heroku", "Reverse-Proxy"]
+}]; // need to maintain two copies of blogs. one thats formatted already, and another that can be easily editied in editor
+
+var blogs = [
+/*
+{
+  "id": 5,
+  "title": "Bundling Intelligence",
+  "image": "https://www.robotbutt.com/wp-content/uploads/2016/09/Picard-Tea-e1473391385313.jpg",
+  "imgSizes":["640px","1000px"],
+  "description": 'Hi, my names Angel. Welcome to my talk. How is everyone doing? More importantly how are you doing as an individual right now? I want to talk to you personally. Can we take a moment? Are you there?',
+  "text": `<p>Hi, my names Angel. Welcome to my talk. How is everyone doing? More importantly how are you doing as an individual right now? I want to talk to you personally. Can we take a moment?</p><p>Are you there?</p><p>Great, I hope your here to take this journey with me. Perhaps, it is just me alone on this journey. Which is ok. If that is the case, I feel I am in good company. Let me take this moment to tell you about yourself. </p><p>Or about myself, I think that is where this is going. And since we are talking about myself good news, I found my pants. Thats an inside joke with myself (see what I did there). You’re not a true myselfer if you don't get it. Sorry bro its a my-self thing. </p><p>Language is funny. A dull and insufficient instrument at times. Other times it can cut razor sharp. However, I'm not sure if theres any instrument sharp enough to capture the clarity of the image I want to portray. Perhaps polished be it may. </p><p>Polished enough to see oneself. </p><p>Thanks for coming to my talk. </p><p>Wait that doesn't sound right. Okay, so look we have a lot of protocols for dealing with one another. Especially now, ya know, with everything thats going on. So hear me out. I got this shiny new invention thats going to completely solve all this. </p><p>Its a program Ima call "Quote" that makes a record of what you last said, complete sentence or maybe by past seconds. Kinda like that program that handles log entries on Star Trek. That would make writing this a lot easier. Except I'm not saying any of this out loud. Would be better if it was written. This the same reason I don't wanna talk to you people about getting work done over the phone. I rather have our conversation in messages so we can look back on them and shit. I don't know. But also, just to help people get ones thoughts together and their mind right. Recharging your workplace culture, all that. Bro this is going bad.</p><p>Check me out though, its not like you don't already have a ton of programs listening to your audio now anyways. With this you know we listenen to you at all times. And we will make a log of other applications that are recording you and let you know they recording too. Ay and look, you can keep all your recordings to yourself and shit ion even care. Its going to be like your own privacy fence, starting with audio. And its gonna give you a quote of all your data thats being used by other companies too. </p><p>You know what sucks. Finding out something you were in support of might not of been in your best interest. Now you gotta cast it aside like it disappointed you the whole time type shit. Or nah maybe not the whole time. But large sections of it. Time…</p><p>Wow, this is starting to feel like a waste of it, am I right? </p><p>Cause I feel like I'm wrong. </p><p>This is atleast definately a waste of space. Can we agree? </p><p>Why are you so tense. Feel like I'm trying to sell you something. If I could just get you to pullout your phone and download this app. </p><p>Nah but this is serious talk bro. Thats why I'm glad I could share it. With you. And thank you for being such good company. </p>`,
+  "date": "July 17, 2020",
+  "tags": ["BundleIQ", "Star-Trek", "2020" ],
+  "readTime": 3
+},*/
+{
+  "id": 4,
+  "title": "How to Help When You Can't Help",
+  "image": "https://static.wixstatic.com/media/fac0f1_7f62ca69b0954e16b662c79d2786f068~mv2.jpg",
+  "imgSizes": ["640px", "1000px"],
+  "description": "This is going to be the first blog where I didnt have a general idea of where the entry was going. Most of the time I have a rough outline (even though it might not look like it). The work is trying to get  the ideas out of my head before they are loss. But here, I dont really have any ideas. Idk, but we're going to make it work. And by we're I mean me. Cause you cant help right?",
+  "text": "<p>This is going to be the first blog where I didn't have a general idea of where the entry was going. Most of the time I have a rough outline (even though it might not look like it). The work is trying to get the ideas out of my head before they are loss. But here, I don't really have any ideas. </p><p>Idk, but we're going to make it work. And by we're I mean me. Cause you cant help right?</p><p>Or can you?</p><p>So look bro, one of my biggest pet peeves is when people at the skate park who seen me fall ask</p><blockquote>  <p>Yo you good?</p></blockquote><p>Like bro, ya I'm likely good. </p><p>But what if I wasn't. What if I wasn't good? What if in this very moment I was in agonizing pain, what are you going to do to make things better?</p><p>In fact, what if your not okay? What are you going to do then? </p><p>Like i said in the beginning I'm not really sure where this is going. If you were reading this for some sort of edification, I apologize. </p>",
+  "date": "July 11, 2020",
+  "tags": ["Help", "2020"],
+  "readTime": '< 1'
 }, {
-  "id": 2,
-  "title": "My Task Grid",
-  "image": "https://res.cloudinary.com/duua3lsu1/image/upload/v1557590908/blog/task-grid-thumbnail.png",
-  "tools": "Javascript | React | Sass",
-  "description": "Task management app built with Reacts",
-  "text": 'Alright so Im not a crappy person. Sometimes I just think like one. Like this afternoon when I got a message from someone "looking for help with web design". It was obvious the guy had messaged the wrong person. Im a web developer (aka software developer/engineer). Not a web designer. But hold on, "after reading your Simbi page, I wonder if you might also be able to help me with another goal of mine". Hopefully something developer oriented, am I right?[screenshot - "Do you see this set-up here? www.dungeonsanddevelopers.com. Id really love to find a way to copy it (or make my own), where I can make my own talent tree, add my own images and text."]Heres a list of things Id really love. Id really love a puppy. Id really love a decent haircut. Id really love to see a few people attempt to drop in at my local skatepark. Id really love for there to be more 3D character artists/animators on the internet willing to work for free. Id really love it if Rune Skovbo could help Mackey calculate 2D blend trees in javascript so I can steal his animation code. Id really love it if the bank would stop forclosing on my home. Id really love to write a good blog entry.I probably wouldnt mind making a skill/talent tree for the guy messaging me either. I mean I have to do something similar to interface with the dialog tree from Watson Assistant for one of my project anyways. Plus if I decide not to help him, he might try to say I stole his idea and used it in one of my projects. If you havent visited the Dungeon And Developers website yet, dont worry, I already did it for you. Its basically a quiz to test how talented you are in web development. Im a lvl 24 web developer. [image here]Who am I fooling Im no lvl 24 web developer. Im a web designer at best. I should be honored that someone even messaged me for my help. Fuck my career aspirations, right? I am curently reevaluating why I signed up on that sYmBiOtiC site in the first place. My house is getting forclosed, I need to be looking for a way to pay this mortgage, not designing someones skill tree for the free. If your still reading this, let me take this opportunity to share with you my [resume] in case your considering hiring me for a job (please help).Idk where im going with this blog. Its my first time, go easy on me . If this blog hasnt been useful for anything, jus know... you should try and eat a mango while its still mostly green. The way I see it, most the mangos you will ever eat will probably be ripe and mostly yellow. But if your like me, and you really love mangos, try mixing it up by eating one while its still a little bitter. Its a nice way to condition yourselve for bullsh-[mango images]Crap, I suck at blogging. Feel like I couldve written the whole thing backwards and it wouldve still made as much sense. I hope I get better at this. And by get better, I mean I hope it takes less time cause I got other stuff to do. Btw there may have been more to the site that I titled this entry after. I just didnt care enough to look into it.  Supposedly its an RPG?I think the real takeaway here is this: if you wanna get someone to help you with something, make them reevaluate their identity, and provide them an opportunity to prove that they arent an imposter. And preferably get them to do so at a very challening moment in their lives.If you dont wanna hire me you can support me on patreon. Im tryna buy a racing sim rig. I will design you a website for all donations over 50. I havent really setup the patreon yet, so just cashapp me and we will work it out.',
-  "date": "June 12, 2019",
-  "tags": ["Design", "Devopment", "Javascript", "Mangos"]
-}];
-var blogs = [{
+  "id": 3,
+  "title": "The Seeds are Rippe",
+  "image": "https://nypost.com/wp-content/uploads/sites/2/2020/06/george-floyd-1.jpg?quality=80&strip=all",
+  "imgSizes": ["640px", "1000px"],
+  "description": 'Hi, my names Angel. Welcome to my talk. How is everyone doing? More importantly how are you doing as an individual right now? I want to talk to you personally. Can we take a moment? Are you there?',
+  "text": "<p>Hi, my names Angel. Welcome to my talk. How is everyone doing? More importantly how are you doing as an individual right now? I want to talk to you personally. Can we take a moment?</p><p>Are you there?</p><p>Great, I hope your here to take this journey with me. Perhaps, it is just me alone on this journey. Which is ok. If that is the case, I feel I am in good company. Let me take this moment to tell you about yourself. </p><p>Or about myself, I think that is where this is going. And since we are talking about myself good news, I found my pants. Thats an inside joke with myself (see what I did there). You\u2019re not a true myselfer if you don't get it. Sorry bro its a my-self thing. </p><p>Language is funny. A dull and insufficient instrument at times. Other times it can cut razor sharp. However, I'm not sure if theres any instrument sharp enough to capture the clarity of the image I want to portray. Perhaps polished be it may. </p><p>Polished enough to see oneself. </p><p>Thanks for coming to my talk. </p><p>Wait that doesn't sound right. Okay, so look we have a lot of protocols for dealing with one another. Especially now, ya know, with everything thats going on. So hear me out. I got this shiny new invention thats going to completely solve all this. </p><p>Its a program Ima call \"Quote\" that makes a record of what you last said, complete sentence or maybe by past seconds. Kinda like that program that handles log entries on Star Trek. That would make writing this a lot easier. Except I'm not saying any of this out loud. Would be better if it was written. This the same reason I don't wanna talk to you people about getting work done over the phone. I rather have our conversation in messages so we can look back on them and shit. I don't know. But also, just to help people get ones thoughts together and their mind right. Recharging your workplace culture, all that. Bro this is going bad.</p><p>Check me out though, its not like you don't already have a ton of programs listening to your audio now anyways. With this you know we listenen to you at all times. And we will make a log of other applications that are recording you and let you know they recording too. Ay and look, you can keep all your recordings to yourself and shit ion even care. Its going to be like your own privacy fence, starting with audio. And its gonna give you a quote of all your data thats being used by other companies too. </p><p>You know what sucks. Finding out something you were in support of might not of been in your best interest. Now you gotta cast it aside like it disappointed you the whole time type shit. Or nah maybe not the whole time. But large sections of it. Time\u2026</p><p>Wow, this is starting to feel like a waste of it, am I right? </p><p>Cause I feel like I'm wrong. </p><p>This is atleast definately a waste of space. Can we agree? </p><p>Why are you so tense. Feel like I'm trying to sell you something. If I could just get you to pullout your phone and download this app. </p><p>Nah but this is serious talk bro. Thats why I'm glad I could share it. With you. And thank you for being such good company. </p>",
+  "date": "July 06, 2020",
+  "tags": ["Self-Care", "Quotes", "2020"],
+  "readTime": 2
+}, {
   "id": 2,
   "title": "The Choice Is Yours ",
   //https://i.imgur.com/aFIFrum.png , https://i.imgur.com/ITmGmcm.jpg
@@ -1306,8 +1344,8 @@ var blogs = [{
   "description": 'I went to McDonalds this evening. They forgot to give me the fries that they charged me for. I didnt realize until I got home of course. I was dissapointed because I had been friendly with the lady who handed me my food, going as far as to ask her what time she got off that evening...',
   "text": "<div><p>I went to McDonalds this evening. They forgot to give me the fries that they charged me for. I didn't realize until I got home of course. I was dissapointed because I had been friendly with the lady who handed me my food, going as far as to ask her what time she got off that evening.</p><p>About 12 hours earlier, I was at the same McDonalds for a late night-early morning meal. I saw that they had sausage &amp; egg mcmuffins for half-price from 5am - 10am. When I went to order it, I was informed over the intercom that the offer didnt start for another 12 minutes. This information was provided courtesy of the same lady who would hand me a fry-less bag later that evening. With some quick maths I calculated how much money I would make in 15 mins at my job. I concluded that, relative to my hourly wage, it wouldnt be worth my time to wait the 12 minutes. I pay the full price of 3.89 and go about my morning/night.</p><p>24 hours later, 12 hours after I was handed the bag without fries, I was very hungry again. Being too early in the morning to confront a McDonalds employee about my fry situation the previous day, I decide to go to taco bell. Fortuanetly, taco bell closed 2 hours prior to my arrival. So the only other option in this percuilar situation, was to head to the McDonalds at which I was cheated out of a medium fry and denied a cheap sausage &amp; egg mcmuffin. </p><p>I make it to the drive thru menu, and proceed with my order. A quarter pounder, mchicken and a mango smoothie. It was not my normal 5am meal, i felt like improvising a little. I neglected to mention to the employee over the intercom the free medium fry that i expected to be included in my order, until I got to the window. I felt it was better to inform an employee of my sitatuion face to face rather then over an intercom. </p><p>Before I continue with the story, I just wanna mention briefly what the subject of this blog entry is: </p><blockquote><p>Never be so sure of what you want that you arent willing to take something better.</p></blockquote><p>See, I expected that whatever I ordered would include a medium fry- free of charge. I would explain my situation at the window and negotiate compesation for my losses. If they refused I would refuse to pay for the rest of my order, and threaten to take my business to another McDonalds, which conveniently happened to be just as far from my house as the current one. </p><p>Before I could proceed with this plan however, I had to go by the bank and withdraw 20 bucks. They were only accepting cash at this time. After this minor hiccup I proceeded with the plan to secure the free medium fry. I placed my order and drove up to the window; no one was there to take my payment. This wasnt a serious issue, I just needed to wait for an employee to come take my money. A thought came to my mind... what if I pretend I don't have cash, only my credit card. They would of course be annoyed, because they explicitly told me they were only taking cash and a small confrontation would likely insue. But thats it right? I would promptly tell them Im joking, then request they give me a free fry and hand them the cash for the meal. </p><blockquote><p><em>Employee</em>:  \"Hery darling, quarter pounder, mchicken and a mango smoothie- $8.89\".<br><em>Me</em>:  \"Alright\", attempts to hand employee credit card.<br><em>Employee</em>:  \"Cash only\"<br><em>Me</em>:  \"wah?\"<br><em>Employee</em>:  \"I said cash only 10 times at the window..\"<br><em>Me</em>:  \"Oh, I didnt kno what you were saying\"</p></blockquote><p>Employee: lets out big sigh, murmurs something to coworker, closes window and walks away.</p><p>At this point I know Im in for a treat. Whatever happens next is gotta be better then a medium fry. First assumption: Im getting a free meal. And sure enough that is what ocurred. </p><p>So why am I telling you this story? Well, I figured it be more interesting then writing about VDOMs. Im tryna fillup this blog with some content cause it looks wierd otherwise. And being a tech guy, my first inclination is to write about something tech related. Its what all the other cool kids are doing. So I considered writing about Virtual DOMs. I then got hungry and headed to McDonalds for my free medium fry.</p><p>Before I continue with the rest of this blog post, checkout <a href=\"https://www.yang2020.com/\" target=\"_blank\">Andrew Yang's</a> presidential campaign. He's like the Bernie Sanders 2.0. And he wants to give everyone 1000 bucks a month.</p><p>Anyways in recent news, I matched with the lady from McDonalds on a dating app. Perhaps one of these days Ill take her out to taco bell. She works like 12 hours a day though, which is retarded. </p><p>But you know whats not retarded? $1000 bucks a month, courtesy of <a href=\"https://www.youtube.com/watch?v=Xz3L79mBKD0&amp;t=82s\" target=\"_blank\">Andrew Yang</a>. Really you should check em out. Hes a tech entreprenuer so hes pro-automation. Hopefully he can expedite the automation of fast food workers. No human no problem right? Shouldnt be to hard to engineer an automated solution to fast food. Theres not much special about it, its fairly straight forward. And Im confident a machine wouldnt have forgotten to give me my medium fries. They would have however, still denied the deal with the sausage &amp; egg mcmufin 12 minutes before 5. And a computer wouldnt of been subject to give me a whole meal for the free (shoutout to that lady for looking out). </p><p>Also, while your at it, checkout <a href=\"https://www.youtube.com/watch?v=Yb5ivvcTvRQ&amp;t=1915s\" target=\"_blank\">The Venus Project</a>. I stole the picture for this post from one of their videos so only fair I plug them somewhere in this. And if after exploring The Venus Project you still got some indeterminism left in you, listen to a talk or two by <a href=\"https://www.youtube.com/watch?v=hLeQBHlWmfE\" target=\"_blank\">Jiddu Krishnamurti</a>.</p><p>Btw if you do begin to endorse Yang's platform of 1000 a month for every american, your gonna have to deal with a common objection that goes like this: giving everyone 1k a month will disensentivice work and everyone will be lazy. The objector will posit that instead you should jusr work hard, play by the rules, and you\u2019ll go as far as your talents will take you. </p><p><a href=\"https://www.youtube.com/watch?v=dRolGQ3QJPE\" target=\"_blank\">[insert link to rebuttal here]</a> </p><p> I could've summarized the link above, and perhaps related the last few paragraphs to the subject of this blog entry better, but I cant be bothered. In honesty it would be more boring than writing about VDOMs.</p><p>Stop wage slavery, vote for Andrew Yang.  </p><p>Alright I'm out peace. </p></div>",
   "date": "June 22, 2019",
-  "tags": ["Communism", "2020", "Mangos"],
-  "readTime": 6
+  "tags": ["Communism", "Mangos", "2020"],
+  "readTime": 5
 }, {
   "id": 1,
   "title": "Dungeons & Developers ",
@@ -1317,7 +1355,7 @@ var blogs = [{
   "text": '<div><p>Alright so Im not a crappy person. Sometimes I just think like one. </p><p>Like this afternoon when I got a message from someone "looking for help with web design". It was obvious the guy had messaged the wrong person. Im a web developer (aka software developer/engineer). Not a web designer. But hold on, </p><blockquote><p>after reading your Simbi page, I wonder if you might also be able to help me with another goal of mine. </p></blockquote><p>Hopefully something developer oriented, am I right?</p><blockquote><p>Do you see this set-up here: <a href="http://www.dungeonsanddevelopers.com" target="_blank">www.dungeonsanddevelopers.com</a>? Id really love to find a way to copy it (or make my own), where I can make my own talent tree, add my own images and text</p></blockquote><p>Heres a list of things Id really love... </p><p>Id really love a puppy. Id really love a decent haircut. Id really love to see a few people attempt to drop in at my local skatepark. Id really love for there to be more 3D character artists/animators on the internet willing to work for free. Id really love it if Rune Skovbo could help Mackey calculate 2D blend trees in javascript so I can steal his animation code. Id really love it if the bank would stop forclosing on my home. Id really love to write a good blog entry.</p><p>I probably wouldnt mind making a skill/talent tree for the guy messaging me either. I mean I have to do something similar to interface with the dialog tree from Watson Assistant for one of my project anyways. Plus if I decide not to help him, he might try to say I stole his idea and used it in one of my projects.</p><p> If you havent visited the <a href="http://www.dungeonsanddevelopers.com/" target="_blank">Dungeon And Developers</a> website yet, dont worry, I already did it for you. Its basically a quiz to test how talented you are in web development. Im a lvl 24 web developer. </p><p> <img src="https://i.imgur.com/SYvFkRA.png" alt="level-24-developer"><br>Who am I fooling Im no lvl 24 web developer. Im a web designer at best. I should be honored that someone even messaged me for my help. Fuck my career aspirations, right? I am curently reevaluating why I signed up on that sYmBiOtiC site in the first place. My house is getting forclosed, I need to be looking for a way to pay this mortgage, not designing someones skill tree for the free. </p><p>If your still reading this, let me take this opportunity to share with you my [resume] in case your considering hiring me for a job (please help).</p><p>Idk where im going with this blog. Its my first time, go easy on me . If this blog hasnt been useful for anything, jus know... you should try and eat a mango while its still mostly green. The way I see it, most the mangos you will ever eat will probably be ripe and mostly yellow. But if your like me, and you really love mangos, try mixing it up by eating one while its still a little bitter. Its a nice way to condition yourselve for the bullsh-</p><p><img src="https://i.imgur.com/JH5R83O.jpg" alt="green-mangos"></p><p>Crap, I suck at blogging. Feel like I couldve written the whole thing backwards and it wouldve still made as much sense. I hope I get better at this. And by get better, I mean I hope it takes less time cause I got other stuff to do. Btw there may have been more to the site that I titled this entry after. I just didnt care enough to look into it.  Supposedly its an RPG?</p><p>I think the real takeaway here is this: if you wanna get someone to help you with something, make them reevaluate their identity, and provide them an opportunity to prove that they arent an imposter. And preferably get them to do so at a very challening moment in their lives.</p><p>If you dont wanna hire me you can support me on patreon. Im tryna buy a racing sim rig. I will design you a website for all donations over $50. I havent really setup the patreon yet, so just cashapp me and we will work it out.</p></div>',
   "date": "June 12, 2019",
   "tags": ["Design", "Devopment", "Javascript", "Mangos"],
-  "readTime": 3
+  "readTime": 4
 }];
 var _default = {
   projects: projects,
@@ -1414,7 +1452,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64353" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60545" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
