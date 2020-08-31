@@ -1017,7 +1017,7 @@ var _default = function _default(initial) {
           audio.onended = actions.pauseAudio;
           audio.play();
           actions.playAudio(audio);
-          alert(" \n      This feature is still very early in development\n      Try again much later\n      \n In the meantime, heres some bg music (maybe)\n      \n FYI: if you're ever on sketchy page, leave immediately and avoid clicking anything. It could be the catalyst for a hack");
+          alert(" \n      This feature is still early in development\n      Try again later\n      \n In the meantime, heres some bg music (maybe)");
         }
 
         return (0, _hyperapp.h)("div", {
@@ -1422,8 +1422,13 @@ var BlogLink = function BlogLink(_ref) {
     href: "/updating-to-babel-7.4/"
   }, (0, _hyperapp.h)("div", {
     class: "w-full md:w-1/2 shadow bg-dark-100 rounded-lg rounded-r-none min-h-featured-item bg-center bg-no-repeat",
-    style: "background-image: url(".concat(blog.image, ");\n              background-size: ").concat(blog.imgSizes[0], ";")
-  }), (0, _hyperapp.h)("div", {
+    style: "background-size: ".concat(blog.imgSizes[0], ";")
+  }, (0, _hyperapp.h)("img", {
+    src: blog.image,
+    loading: "lazy",
+    alt: "...",
+    style: "width:100%; height:100%;object-fit: cover;"
+  })), (0, _hyperapp.h)("div", {
     class: "w-full md:w-1/2 p-4"
   }, (0, _hyperapp.h)("div", {
     class: "border-b border-gray-700 text-center"
@@ -1521,15 +1526,15 @@ var _default = function _default(projects, actions) {
     var project = projects.filter(function (project) {
       return project.id == match.params.project_id;
     })[0];
-    var compile = dangerouslySetInnerHTML(project.text);
+    var compile = dangerouslySetInnerHTML(project.text); //   <div class="hidden mx-auto lg:block w-full bg-center bg-no-repeat" style={`background-size: 1450px; height:80vh; background-image:url(${project.image});`}>
+    //   {/* <h1 class="title text-center align-bottom text-yellow pb-4 text-4xl md:text-6xl"  style ="line-height:60vh;">{project.title}</h1>              */}
+    // </div> 
+    // <div class="block lg:hidden w-full bg-no-repeat" style={`background-size: 850px; background-position: 50% 0%; height:60vh; background-image:url(${project.image});`}>
+    //   {/* <h1 class="title text-center align-bottom text-yellow pb-4 text-4xl md:text-6xl"  style ="line-height:60vh">{project.title}</h1>              */}
+    // </div>
+
     return (0, _hyperapp.h)("section", null, (0, _hyperapp.h)("div", {
-      class: "hidden mx-auto lg:block w-full bg-center bg-no-repeat",
-      style: "background-size: 1450px; height:80vh; background-image:url(".concat(project.image, ");")
-    }), (0, _hyperapp.h)("div", {
-      class: "block lg:hidden w-full bg-no-repeat",
-      style: "background-size: 850px; background-position: 50% 0%; height:60vh; background-image:url(".concat(project.image, ");")
-    }), (0, _hyperapp.h)("div", {
-      class: "bg-reddish container rounded w-full mx-auto max-w-5xl -mt-32 mb-6 border-4 border-gray-700"
+      class: "bg-reddish container rounded w-full mx-auto max-w-5xl mt-6 mb-6 border-4 border-gray-700"
     }, (0, _hyperapp.h)("div", {
       class: "max-w-sm text-center mx-auto bg-gray-300 shadow-xl p-2",
       style: ""
@@ -1577,10 +1582,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ProjectLink = function ProjectLink(_ref) {
   var match = _ref.match,
       project = _ref.project;
+
+  function routeClick(project) {
+    return project.external ? project.link : "".concat(match.path, "/").concat(project.id);
+  }
+
   return (0, _hyperapp.h)("div", {
     class: "project-link bg-reddish shadow-lg border border-yellow text-grey-80 w-full max-w-lg mb-8 md:mx-8"
   }, (0, _hyperapp.h)(_router.Link, {
-    to: "".concat(match.path, "/").concat(project.id),
+    to: routeClick(project),
     class: "project-link no-underline "
   }, (0, _hyperapp.h)("header", {
     class: "project-thumbnail relative h-64 border-b-4 border-yellow bg-cover bg-center",
@@ -1709,11 +1719,22 @@ var projects = [{
   "title": "YouTranslate",
   "link": "https://spankyed.github.io/YouTranslate",
   "image": "https://i.ibb.co/XWxdHtW/yt.png",
-  "tools": "Node | Heroku | Hyperapp",
-  "description": "Web App to translate youtube captions (Powered by Google Cloud)",
-  "text": "<p>Wow, so I have a lot to say about this project. I wrote it almost a year ago. The outline for this, along with a more detailed description is on a hard drive in Boca Raton. One day I'll retrieve it and you can learn all about the week long process I went through to make this application. </p><p>Most importantly, the application doesn't work right now. Because of CORS restrictions, the application requires a reverse proxy server to retrieve CC data  from Youtube's web api. I believe there may be an issue with my Heroku account that is hosting the node reverse proxy server.  For now, uh, checkout the github page. And if your interested in trying it out, replace the URL for the reverse proxy with any working one. </p><p>file location: <em>src/utils/translate.js</em>replace this url:  <em>https://intense-river-58574.herokuapp.com/</em></p><p>https://github.com/Spankyed/YouTranslate</p>",
+  "tools": "Node | Google Cloud | Heroku",
+  "description": "Web App to translate YouTube closed captions",
+  "text": "<p>I wanted to learn a new language to show off on my resume and to the ladies. So I decided to build this app. The goal was to be able to listen to a YouTube video in English and see the captions in a different language.</p><p>First I needed to get the captions for a YouTube video. I googled it, and found that you can get the caption for a video by using a special YouTube URL that looks like this.</p><blockquote>  <p>http://gdata.youtube.com/feeds/api/videos/[VIDEOID]/captiondata/[CAPTION TRACKID]</p></blockquote><p>So all I really needed to do was translate these captions. For this I did some research into Google's translate service. After creating a service account, I devised a plan to communicate with the Google\u2019s API. I wanted to do the least work possible. In order to use the service I had to send the API endpoint a key along with my translation request. And I couldn't put the key on the client/webpage of course, because then anyone who visits the site will have the key to my Google translate service account. </p><p>So I needed to put the key to use the service on a server. Then the webpage could make requests to that server. Things were coming along. I designed and wired up a user interface to fetch the YouTube closed captions, then that webpage could send those captions to my server, which would then get sent to Google translate, then back to my server, then to the webpage. And vioala.</p><p>One problem. I couldn't request the YouTube captions from my webpage. Something something, cross-site scripting, something something, CORS. In other words, the browser wasn\u2019t cool with my webpage accessing captions from Youtube\u2019s servers, because YouTube hadn't said it was ok.</p><p>Luckily I had a server already setup for the purpose of hiding my Google key and getting the translations. And since servers do not conform to CORS policies, I could just use it as a reverse proxy to request the captions for my webpage. Then send em off to google for translations.</p><p>I like to think the rest was history. However, I had a number of problems still to encounter. I decided to host the webpage on GitHub pages. And because my app is a \u201Csingle-page-application\u201D, GitHub didn't know how to handle the routing for my application. </p><p>In theory, the routing is simple, the user goes from the main page to a page with a video and translated captions. However the page with the video and translated text isn\u2019t actually a different page. It\u2019s just the same page being rerendered through some fancy sleight of hand. For that reason GitHub doesn\u2019t know what to do when the URL changes. GitHubs like oh shit the user just requested some URL, lets tell the webserver to fetch that new page, but oh wait, there\u2019s no page matching that URL. </p><p>Instead of making a request to the webserver, I need the page to do nothing. So I used a hack where you can have a 404 (resource not found) page, that GitHub redirects to when it can\u2019t find the pages. And that 404 page redirects to the main page after storing the URL with the video ID in session memory. The problem then becomes making use of the session memory, because if I naively set the page location GitHub will trigger a page request, and then I\u2019m in a circle jerk. I learned you can push state to the location history, which won\u2019t trigger this loop. Then hope and pray my single-page-application understands the location history changes and acts accordingly.</p><p>Of course my application didn\u2019t understand shit. So instead I just turned the 404 page into a second copy of the application to handle routing to the captions page. This has been the only thing that has worked so far. I could've made it so that the app doesn\u2019t use the current URL to retrieve captions and translations. But that\u2019s no fun and is not how the cool kids are doing shit. Plus, it means the user has to go through the application UI every time they want to get a video with translated captions, instead of just copy and pasting a URL they may have previously visited.</p><p>Eventually I showed this project off to one of my coworkers. To my delight, he informed me that YouTube already translates captions into any language for you, you just have to click captions settings, then auto translate and boom. </p><p>So ya, thanks Phil. Also the app is currently broken, which you probably realized. I'll fix it at some point.</p>",
   "date": "July 9, 2019",
-  "tags": ["Hyperapp", "Heroku", "Reverse-Proxy"]
+  "tags": ["Node", "Heroku", "Google Cloud"],
+  "external": false
+}, {
+  "id": 2,
+  "title": "PBC Vendor Search",
+  "link": "https://pbcgov.org/pbcvendors",
+  "image": "https://i.ibb.co/nzK3GJN/pbcvendors.png",
+  "tools": ".Net | Oracle | PL/SQL",
+  "description": "Palm Beach County Vendor Search/Directory",
+  "date": "January 20, 2019",
+  "tags": ["Node", "Heroku", "Google Cloud"],
+  "external": true
 }]; // need to maintain two copies of blogs. one thats formatted already, and another that can be easily editied in editor
 
 var blogs = [{
@@ -1766,7 +1787,7 @@ var blogs = [{
     "id": 1108273516151,
     "html": "<p>A reference to \"One of the best Captain's Logs\".</p><div class=\"bg-black video-wrapper\"><iframe src=\"https://www.youtube.com/embed/wP20erTQf4g?t=41\"></iframe></div>"
   }],
-  "date": "July 17, 2020",
+  "date": "Stardate 98143.54",
   "tags": ["BundleIQ", "Star-Trek", "2020"],
   "readTime": 6
 }, {
@@ -1920,7 +1941,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59074" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51001" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
