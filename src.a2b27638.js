@@ -1012,7 +1012,7 @@ var _default = function _default(initial) {
         var headshotImgUrl = "https://i.ibb.co/y83tr7m/fix-that.png";
 
         function liveClick() {
-          var audio = new Audio('Furthest_Thing.mp3');
+          var audio = new Audio('95_Til_Infinity.mp3');
           audio.volume = 0.2;
           audio.onended = actions.pauseAudio;
           audio.play();
