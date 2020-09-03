@@ -1728,7 +1728,7 @@ var projects = [{
 }, {
   "id": 2,
   "title": "PBC Vendor Search",
-  "link": "https://pbcgov.org/pbcvendors",
+  "link": "https://www.pbcgov.org/pbcvendors",
   "image": "https://i.ibb.co/nzK3GJN/pbcvendors.png",
   "tools": ".Net | Oracle | PL/SQL",
   "description": "Palm Beach County Vendor Search/Directory",
