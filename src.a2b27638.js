@@ -1012,7 +1012,7 @@ var _default = function _default(initial) {
         var headshotImgUrl = "https://i.ibb.co/y83tr7m/fix-that.png";
 
         function liveClick() {
-          var audio = new Audio('95_Til_Infinity.mp3');
+          var audio = new Audio('Furthest_Thing.mp3');
           audio.volume = 0.2;
           audio.onended = actions.pauseAudio;
           audio.play();
@@ -1591,7 +1591,8 @@ var ProjectLink = function ProjectLink(_ref) {
     class: "project-link bg-reddish shadow-lg border border-yellow text-grey-80 w-full max-w-lg mb-8 md:mx-8"
   }, (0, _hyperapp.h)(_router.Link, {
     to: routeClick(project),
-    class: "project-link no-underline "
+    class: "project-link no-underline",
+    target: "".concat(project.external ? '_blank' : '')
   }, (0, _hyperapp.h)("header", {
     class: "project-thumbnail relative h-64 border-b-4 border-yellow bg-cover bg-center",
     style: "background-image: url(".concat(project.image, ");")
@@ -1941,7 +1942,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51001" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55173" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
