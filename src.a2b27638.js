@@ -1012,7 +1012,7 @@ var _default = function _default(initial) {
         var headshotImgUrl = "https://i.ibb.co/y83tr7m/fix-that.png";
 
         function liveClick() {
-          var audio = new Audio('Furthest_Thing.mp3');
+          var audio = new Audio('95_Til_Infinity.mp3');
           audio.volume = 0.2;
           audio.onended = actions.pauseAudio;
           audio.play();
@@ -1433,7 +1433,7 @@ var BlogLink = function BlogLink(_ref) {
   }, (0, _hyperapp.h)("div", {
     class: "border-b border-gray-700 text-center"
   }, (0, _hyperapp.h)("p", {
-    class: "text-sm md:text-base font-normal text-gray-700 -pt-1 -mb-1"
+    class: "text-sm md:text-base font-normal text-gray-800 -pt-1 -mb-1"
   }, blog.date), (0, _hyperapp.h)("h3", {
     class: "font-bold text-3xl mb-2 inline-block text-gray-200"
   }, blog.title)), (0, _hyperapp.h)("p", {
@@ -1591,8 +1591,7 @@ var ProjectLink = function ProjectLink(_ref) {
     class: "project-link bg-reddish shadow-lg border border-yellow text-grey-80 w-full max-w-lg mb-8 md:mx-8"
   }, (0, _hyperapp.h)(_router.Link, {
     to: routeClick(project),
-    class: "project-link no-underline",
-    target: "".concat(project.external ? '_blank' : '')
+    class: "project-link no-underline "
   }, (0, _hyperapp.h)("header", {
     class: "project-thumbnail relative h-64 border-b-4 border-yellow bg-cover bg-center",
     style: "background-image: url(".concat(project.image, ");")
@@ -1729,7 +1728,7 @@ var projects = [{
 }, {
   "id": 2,
   "title": "PBC Vendor Search",
-  "link": "https://www.pbcgov.org/pbcvendors",
+  "link": "https://pbcgov.org/pbcvendors",
   "image": "https://i.ibb.co/nzK3GJN/pbcvendors.png",
   "tools": ".Net | Oracle | PL/SQL",
   "description": "Palm Beach County Vendor Search/Directory",
@@ -1942,7 +1941,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55173" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58541" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
